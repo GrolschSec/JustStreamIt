@@ -1,0 +1,50 @@
+@font-face{
+    font-family: 'smallmemory';
+    src: url('../font/smallmemory/smallmemory.woff2') format('woff2'),
+    	 url('../font/smallmemory/smallmemory.ttf') format('ttf'),
+         url('../font/smallmemory/smallmemory.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$color-bg-header: #F5F5F5;
+
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $color-bg-header;
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+
+.logo{
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	&__pic{
+		width: 40%;
+	}
+}
+
+$nav__link--color: black;
+$nav__link--hover--color: indianred;
+
+.nav{
+	width: 80%;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	&__link{
+		text-decoration: none;
+		color: $nav__link--color;
+		font-family: "smallmemory";
+		font-size: 1.7em;
+		&--active{
+			color: grey;
+		}
+		&:hover{
+			color: $nav__link--hover--color;
+		}
+	}
+}

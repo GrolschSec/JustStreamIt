@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "smallmemory";
+  src: url("../font/smallmemory/smallmemory.woff2") format("woff2"), url("../font/smallmemory/smallmemory.ttf") format("ttf"), url("../font/smallmemory/smallmemory.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F5F5F5;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.logo {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+.logo__pic {
+  width: 40%;
+}
+
+.nav {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.nav__link {
+  text-decoration: none;
+  color: black;
+  font-family: "smallmemory";
+  font-size: 1.7em;
+}
+.nav__link--active {
+  color: grey;
+}
+.nav__link:hover {
+  color: indianred;
+}/*# sourceMappingURL=header.css.map */
