@@ -170,7 +170,7 @@ function addCarouselBtn(carousel, name, text){
 	let btn = document.createElement('button');
 
 	btn.textContent = text;
-	btn.classList.add('carousel__button', `carousel__button--${text}`);
+	btn.classList.add('carousel__button', `carousel__button--${name}`);
 	carousel.appendChild(btn);
 }
 
