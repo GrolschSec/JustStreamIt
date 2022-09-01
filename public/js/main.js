@@ -163,11 +163,15 @@ function addCarousel(carousel, data){
 		img[ii].addEventListener('click', event => {
 			openModal(data[ii]['id']);
 		});
-	}
+	};
 }
 
-function addCarouselBtn(carousel, text){
-	carousel.appendChild(document.createElement('button')).classList.add('carousel__button', `carousel__button--${text}`);
+function addCarouselBtn(carousel, name, text){
+	let btn = document.createElement('button');
+
+	btn.textContent = text;
+	btn.classList.add('carousel__button', `carousel__button--${text}`);
+	carousel.appendChild(btn);
 }
 
 async function getCategories(){
@@ -195,9 +199,9 @@ async function getCategories(){
 
 		category[i].appendChild(document.createElement('h1')).textContent = titles[i];
 		category[i].appendChild(document.createElement('div')).classList.add('carousel');
-		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'left');
+		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'left', '<');
 		addCarousel(category[i].getElementsByClassName('carousel')[0], data);
-		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'right');
+		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'right', '>');
 		carouselBtnEvent(category[i].getElementsByClassName('carousel')[0]);
 		i++;
 	};
