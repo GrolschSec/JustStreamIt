@@ -115,116 +115,97 @@ async function fetchCategory(categoryName = '', i = 0){
 	return categoryData
 }
 
-
-function newPositionRight(position){
-	let new_position = [];
-	let num = 0;
-
-	for (let i = 0; i < position.length; i++){
-		num = position[i] -= 4;
-		if (num < 0){
-			num += 6;
-		}
-		new_position.push(num);
-	}
-	return new_position;
-}
-
-function newPositionLeft(position){
-	let new_position = [];
-	let num = 0;
-
-
-	for (let i = 0; i < position.length; i++){
-		num = position[i] += 4;
-		if (num > 6){
-			num -= 6;
-		}
-		new_position.push(num);
-	}
-	return new_position;
-}
-
-function getPosition(all, mode){
-	let position = [];
-	for (let i = 0; i != all.length; i++){
-		if (all[i].classList.contains('carousel__img--hide')){
-			position.push(i);
-		}
-	}
-	if (mode === 0){
-		return newPositionLeft(position);
-	}
-	else if (mode === 1){
-		return newPositionRight(position);
+function positionLeft(all, element){
+	let button_left = element.getElementsByClassName('carousel__button--left')[0];
+	for (let i = 0; i < 3; i++){
+		let elm = all[all.length - 1];
+		all[i].remove;
+		element.insertBefore(elm, all[0]);	
 	}
 }
 
-function reorderPosition(all, position){
-	for (let i = 0; i < all.length; i++){
-		if (position.includes(i)){
-			all[i].classList.add('carousel__img--hide');
-		}
-		else {
-			all[i].classList.remove('carousel__img--hide');
-		}
-		console.log(position);
-	};
+function positionRight(all, element){
+	let button_right = element.getElementsByClassName('carousel__button--right')[0];
+	for (let i = 0; i < 3; i++){
+		let elm = all[0];
+		all[i].remove;
+		element.insertBefore(elm, button_right);	
+	}
 }
 
+function reorderPosition(element, position){
+	let all = element.getElementsByClassName('carousel__img');
+	if (position === 0){
+		positionLeft(all, element);
+	}
+	else if (position === 1){
+		positionRight(all, element);
+	}
+}
 
 function carouselBtnEvent(element){
 	let button_left = element.getElementsByClassName('carousel__button--left')[0];
 	let button_right = element.getElementsByClassName('carousel__button--right')[0];
-	let all = element.getElementsByClassName('carousel__img');
 	
 	button_left.addEventListener('click', event => {
-		reorderPosition(all, getPosition(all, 0));
+		reorderPosition(element, 0);
 	});
 	button_right.addEventListener('click', event => {
-		reorderPosition(all, getPosition(all, 1));
+		reorderPosition(element, 1);
 	});
 }
 
+function addCarousel(carousel, data){
+	for (let ii = 0; ii < data.length; ii++){
+		carousel.appendChild(document.createElement('div')).classList.add('carousel__img')
+		let img = carousel.getElementsByClassName('carousel__img');
+		img[ii].appendChild(document.createElement('img')).setAttribute('src', `${data[ii]['image_url']}`);
+		img[ii].addEventListener('click', event => {
+			openModal(data[ii]['id']);
+		});
+	}
+}
+
+function addCarouselBtn(carousel, text){
+	carousel.appendChild(document.createElement('button')).classList.add('carousel__button', `carousel__button--${text}`);
+}
 
 async function getCategories(){
+
+	let i = 0;
+	let category = document.getElementsByClassName('category');
 	let categoryProperties = {
 		'': 1,
 		'Biography': 0,
 		'Comedy': 0,
 		'Crime': 0,
 	}
-	let titles = ["Best movies", "Biography", "Comedy", "Crime"]
-	let i = 0;
+	let titles = [
+		"Best movies",
+		"Biography", 
+		"Comedy", 
+		"Crime"
+	]
+
 
 	for (const [key, value] of Object.entries(categoryProperties)){
-		let category = document.getElementsByClassName('category')[i];
-		category.appendChild(document.createElement('h1')).textContent = titles[i];
-		
-		category.appendChild(document.createElement('div')).classList.add('carousel');
-		let div_carrousel = category.getElementsByClassName('carousel')[0];
-		div_carrousel.appendChild(document.createElement('button')).classList.add('carousel__button', 'carousel__button--left');
+
 		let data = await fetchCategory(key, value);
 
-		for (let ii = 0; ii < data.length; ii++){
-			div_carrousel.appendChild(document.createElement('div')).classList.add('carousel__img')
-			let div_img = div_carrousel.getElementsByClassName('carousel__img')[ii];
-			div_img.appendChild(document.createElement('img')).setAttribute('src', `${data[ii]['image_url']}`);
-			div_img.addEventListener('click', event => {
-				openModal(data[ii]['id']);
-			});
-			if (ii > 3){
-				div_img.classList.add("carousel__img--hide");
-			}
-		}
-		div_carrousel.appendChild(document.createElement('button')).classList.add('carousel__button', 'carousel__button--right');
-		carouselBtnEvent(div_carrousel);
+
+		category[i].appendChild(document.createElement('h1')).textContent = titles[i];
+		category[i].appendChild(document.createElement('div')).classList.add('carousel');
+		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'left');
+		addCarousel(category[i].getElementsByClassName('carousel')[0], data);
+		addCarouselBtn(category[i].getElementsByClassName('carousel')[0], 'right');
+		carouselBtnEvent(category[i].getElementsByClassName('carousel')[0]);
 		i++;
 	};
 }
 
+function main(){
+	fetchBestRatedMovie();
+	getCategories();
+}
 
-fetchBestRatedMovie();
-getCategories();
-
-
+main();
