@@ -1,11 +1,16 @@
 # JustStreamIt 
+## Project 6 OpenClassrooms D-A Python.
 
 ## Objectives of the project:  
 
-1.  Interact with an API ([OCMovies-API-EN-FR
+*  Interact with an API ([OCMovies-API-EN-FR
 Public](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR)).  
-2.  Program an interface for a netflix-like website.
+*  Program an interface for a netflix-like website.
 
+## Instalation:  
 
-## Instalation:
+Clone the project:  
+```
+git clone https://github.com/GrolschSec/JustStreamIt.git
+```
 
