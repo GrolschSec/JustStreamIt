@@ -13,4 +13,7 @@ Clone the project:
 ```
 git clone https://github.com/GrolschSec/JustStreamIt.git
 ```
-
+Install the OCMovies-API (Follow instructions on their github):
+```
+https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
+```
