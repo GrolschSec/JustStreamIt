@@ -6,7 +6,7 @@ function fetchModal(id){
 	let content = document.getElementsByClassName("modal__data")[0];
 	let info = {
 		"imdb_score": 'IMDB Score: ',
-		"avg_vote": 'Box office: ',
+		"worldwide_gross_income": 'Box office: ',
 		"duration": 'Duration (min): ',
 		"date_published": 'Release Date: ',
 		"rated": 'Rated: ',
